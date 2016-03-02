@@ -7,16 +7,13 @@ var bot = new irc.Client(config.server, config.username, {
   userName: config.username,
   password: config.oauth
 });
+
+
 bot.addListener('message', function (from, to, message) {
-    console.log(from + ' => ' + to + ': ' + message);
-    if (from == "bnage") {
-        bot.say('#freakinjolly', "You're the best");
-        bot.say('#bnage', "You're the best");
-    }
-    else if (from == "freakinjolly") {
-        //Will type in both chats, you need to condition the channels
-        bot.say('#freakinjolly', "STFU DIKO");
-        bot.say('#bnage', "STFU DIKO");
+    console.log(from + ' => to ' + message);
+    if (from == "freakinjolly") {
+        bot.say(to, "STFU DIKO");
+    } else {
+        bot.say(to, "You da best");
     }
 });
-
