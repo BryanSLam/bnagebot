@@ -8,4 +8,3 @@ config.channels = ['#bnage', '#freakinjolly'];
 
 
 module.exports = config;
-
