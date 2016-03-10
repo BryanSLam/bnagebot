@@ -28,16 +28,42 @@ exports.setUp = function (callback) {
             //Read the file and return the data stored as a hash
             fs.readFile('./data/custom_commands.txt', 'utf-8', function (err, data) {
                 if (err) throw err;
-                //Parse the read file
-                var i = 0;
-                var arr = data.split(';');
-                var temp = [];
-                for (i = 0; i< arr.length; i++) {
-                    temp = arr[i].split(':');
-                    hash[temp[0]] = temp[1];
+
+                if (data != '') {
+                    //Parse the read file
+                    var i = 0;
+                    var arr = data.split(';');
+                    var temp = [];
+                    for (i = 0; i < arr.length; i++) {
+                        temp = arr[i].split(':');
+                        hash[temp[0]] = temp[1];
+                    }
                 }
                 callback(hash);
             });
         }
     });
+};
+
+/*
+ * Cleanup function, Feeds in the cleanup function that you're using when the bot exits.
+ */
+exports.cleanUp = function (callback) {
+    process.on('cleanup', callback);
+
+    process.on('exit', function () {
+        process.emit('cleanup');
+    });
+
+    //Note the exit, then call the exit process
+    process.on('SIGINT', function () {
+        console.log('CTR C');
+        process.exit(2);
+    });
+
+    process.on('uncaughtException', function (e) {
+        console.log('Uncaught Exception: ');
+        console.log(e.stack);
+        process.exit(99)
+    })
 };
