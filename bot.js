@@ -32,7 +32,7 @@ helper.setUp(function (data) {
                         //TODO
                         //Error check, if command exists already then overwrite
                         commands[newCommand[0]] = newCommand[1];
-                        var text = newCommand[0] + ':' + newCommand[1] + ' ';
+                        var text = newCommand[0] + ':' + newCommand[1] + ';';
                         fs.appendFile('./data/custom_commands.txt', text, function (err) {
                             if (err) throw err;
                             bot.say(to, 'Command ' + newCommand[0] + ' saved!');
@@ -52,11 +52,3 @@ helper.setUp(function (data) {
         }
     });
 });
-
-/*
-bnage: !diko5
-bnagebot: diko (MISSING SUCKS)
-bnagebot: You da best
-
-FIX THIS, ISNT DEALING WITH WHITE SPACE CORRECTLY
-*/

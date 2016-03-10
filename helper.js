@@ -7,8 +7,6 @@ exports.newCommand = function (message) {
     var arr = message.split(' ');
     output[0] = arr[2];
     output[1] = message.substring(15 + (arr[2].length));
-    console.log(output[0] + "fff");
-    console.log(output[1] + "fff");
     return output;
 };
 
@@ -32,7 +30,7 @@ exports.setUp = function (callback) {
                 if (err) throw err;
                 //Parse the read file
                 var i = 0;
-                var arr = data.split(' ');
+                var arr = data.split(';');
                 var temp = [];
                 for (i = 0; i< arr.length; i++) {
                     temp = arr[i].split(':');
